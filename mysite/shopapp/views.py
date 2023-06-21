@@ -4,7 +4,10 @@ from django.http import HttpResponse, HttpRequest
 # Create your views here.
 #
 def shop_index(request: HttpRequest):
-    print(request.path)
-    print(request.method)
-    print(request.headers)
+    # print(request.path)
+    # print(request.method)
+    # print(request.headers)
     return HttpResponse('<h1>Hellow World!</h1>')
+
+def index(request: HttpRequest):
+    return HttpResponse('<h1>"This is my first site"</h1>')
