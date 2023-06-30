@@ -1,26 +1,64 @@
 {% extends 'shopapp/base.html' %}
 
+
 {% block title %}
     shop Index
 {% endblock %}
 
 
 {% block body %}
-<h1> Hello shop index </h1>
 
-<div>
-    <ul>
-        {% for name, price in products %}
-        <li>{{name}} ({{name|length}}) for ${{price}} </li>
-            {% if name|length_is:'7' %}
-                <span>Lucky product</span>
-            {% endif %}
-        {% empty %}
-            No products here
-        {% endfor %}
-    </ul>
-</div>
+    <h1> {{header}} </h1>
 
-<div>Time running: {{time_running}} </div>
-<div> {% lorem 3 p random %} </div>
+    <div>
+        <ul>
+            {% for name, price in products %}
+            <li>{{name}} ({{name|length}}) for ${{price}} </li>
+                {% if name|length_is:'7' %}
+                    <span>Lucky product</span>
+                {% endif %}
+            {% empty %}
+                No products here
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% for el in langs %}
+        <li>{{el}}</li>
+    {% endfor %}
+
+
+    {% if user.age > 29 %}
+        <p>Имя: {{user.name}} Age: {{user.age}}</p>
+    {%endif%}
+
+
+    <p>Адрес: ул. {{address.0}}, д. {{address.1}}, кв. {{address.2}}</p>
+    <p>Владеет языками: {{langs.0}}, {{langs.1}}</p>
+
+    <p> Дата (день/месяц/год) - {% now "j.m.Y" %}</p>
+
+    <div>Time running: {{time_running}} </div>
+
+    {% comment %}
+        <div> {% lorem 3 p random %} </div>
+    {% endcomment %}
+
+    {{text}}
+
+    {% autoescape off %}
+        {{ text }}
+    {% endautoescape %}
+
+    {% with name='Tom' age=29 %}
+        <p>name: {{name}}, age: {{age}}</p>
+    {% endwith %}
+
+    {% with massage='hello ' text2='django'|capfirst %}
+    <p>{{ massage|capfirst|add:text2 }}</p>
+    {% endwith %}
+
+
+
+
 {% endblock %}
